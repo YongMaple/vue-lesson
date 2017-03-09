@@ -2,8 +2,7 @@
 <div>
     <label>姓名：</label>
     <input type="text" v-model="form.name.value">
-    <span v-if="!form.name.valid">正确</span>
-    <span v-else>错误</span>
+    <span v-if="form.name.valid">长度超过限制</span>
     <br>
     <label>年龄：</label>
     <input type="number" v-model="form.age.value"><br>
@@ -56,9 +55,9 @@ export default {
             })
         }
     },
-    computed: {
-        'form.name.valid': function() {
-            return this.form.name.value.length > 10 ? false : true
+    watch: {
+        "form.name.value": function(v) {
+            this.form.name.valid = v.length > 4 ? true :false
         }
     }
 }
