@@ -1,37 +1,48 @@
 <template>
-    <div>
-        <label>姓名：</label>
-        <input type="text" v-model="form.name"><br>
-        <label>年龄：</label>
-        <input type="number" v-model="form.age"><br>
-        <label>性别：</label>
-        <select v-model="form.gender">
+<div>
+    <label>姓名：</label>
+    <input type="text" v-model="form.name"><br>
+    <label>年龄：</label>
+    <input type="number" v-model="form.age"><br>
+    <label>性别：</label>
+    <select v-model="form.gender">
             <option value="">请选择</option>
             <option value="male">男</option>
             <option value="female">女</option>
         </select><br>
-        <button type="button" @click="submit">添加</button>
-    </div>
+    <button type="button" @click="submit">添加</button>
+</div>
 </template>
 
 <script>
 export default {
-    data(){
+    data() {
         return {
-            form:{
-                name:'',
-                age:'',
-                gender:''
+            form: {
+                name: '',
+                age: '',
+                gender: ''
             }
         }
     },
-    methods:{
-       submit(){
-           alert(`输入的姓名：${ this.form.name }，输入的年龄：${ this.form.age }，选择的性别：${ this.form.gender }`)
-       }
-   }
+    methods: {
+        submit() {
+            fetch('http://localhost:3000/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.form)
+            }).then(() => {
+                alert("添加成功")
+            }).catch(response => {
+                console.log(response);
+            })
+        }
+    }
 }
 </script>
 
 <style>
+
 </style>
