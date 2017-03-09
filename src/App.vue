@@ -2,8 +2,8 @@
 <div>
     <label>姓名：</label>
     <input type="text" v-model="form.name.value">
-    <span v-if="form.name.valid">正确</span>
-    <span v-else>正确</span>
+    <span v-if="!form.name.valid">正确</span>
+    <span v-else>错误</span>
     <br>
     <label>年龄：</label>
     <input type="number" v-model="form.age.value"><br>
